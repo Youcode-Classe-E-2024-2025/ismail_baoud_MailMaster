@@ -181,7 +181,33 @@ public function logout(Request $request)
     ]);
 }
 
-
+/**
+ * @OA\Get(
+ *     path="/api/me",
+ *     summary="Get the authenticated user",
+ *     description="Returns the details of the currently authenticated user.",
+ *     tags={"User"},
+ *     security={{"sanctum":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="User details",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="id", type="integer", example=1),
+ *             @OA\Property(property="name", type="string", example="John Doe"),
+ *             @OA\Property(property="email", type="string", format="email", example="john.doe@example.com"),
+ *             @OA\Property(property="created_at", type="string", format="date-time", example="2025-04-07T12:00:00"),
+ *             @OA\Property(property="updated_at", type="string", format="date-time", example="2025-04-07T12:00:00")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Unauthorized",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Unauthorized")
+ *         )
+ *     )
+ * )
+ */
 
     public function me()
     {
