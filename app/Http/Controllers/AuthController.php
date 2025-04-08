@@ -148,7 +148,29 @@ class AuthController extends Controller
         ], 200);
     }
 
-
+/**
+ * @OA\Post(
+ *     path="/api/logout",
+ *     summary="Log out the authenticated user",
+ *     description="This endpoint allows the authenticated user to log out by revoking their access token.",
+ *     tags={"User"},
+ *     security={{"sanctum":{}}},
+ *     @OA\Response(
+ *         response=200,
+ *         description="Logged out successfully",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Logged out successfully")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Unauthorized",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="message", type="string", example="Unauthorized")
+ *         )
+ *     )
+ * )
+ */
 
 public function logout(Request $request)
 {
