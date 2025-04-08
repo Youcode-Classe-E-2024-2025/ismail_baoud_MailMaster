@@ -6,7 +6,33 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @OA\Info(
+ *     title="MailMaster API",
+ *     version="1.0.0",
+ *     description="API documentation for the MailMaster system",
+ *     @OA\Contact(
+ *         email="support@mailmaster.com"
+ *     ),
+ *     @OA\License(
+ *         name="MIT",
+ *         url="https://opensource.org/licenses/MIT"
+ *     )
+ * )
+ */
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     required={"id", "name", "email"},
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="name", type="string", example="John Doe"),
+ *     @OA\Property(property="email", type="string", format="email", example="johndoe@example.com"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", example="2025-04-07T12:00:00"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", example="2025-04-07T12:00:00")
+ * )
+ */
 
 class AuthController extends Controller
 {
