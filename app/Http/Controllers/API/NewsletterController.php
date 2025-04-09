@@ -35,5 +35,40 @@ class NewsletterController extends Controller
     }
 
 
+    /**
+ * Create a new newsletter.
+ * 
+ * This endpoint allows the authenticated user to create a new newsletter.
+ * 
+ * @authenticated
+ * @bodyParam title string required The title of the newsletter. Example: "Tech Updates"
+ * @bodyParam content string required The content of the newsletter. Example: "Latest news in tech."
+ * @response 201 {
+ *   "id": 2,
+ *   "title": "Tech Updates",
+ *   "content": "Latest news in tech.",
+ *   "user_id": 1,
+ *   "created_at": "2025-04-07T12:00:00",
+ *   "updated_at": "2025-04-07T12:00:00"
+ * }
+ * @response 422 {
+ *   "message": "The given data was invalid."
+ * }
+ */
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
 
+        $newsletter = Newsletter::create([
+            'title' => $validated['title'],
+            'user_id' => Auth::id(),
+        ]);
+
+        return response()->json($newsletter, 201);
+    }
+
+
+ 
 }
