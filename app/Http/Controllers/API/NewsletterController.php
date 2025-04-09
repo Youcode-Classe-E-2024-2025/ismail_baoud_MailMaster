@@ -133,5 +133,25 @@ class NewsletterController extends Controller
     }
 
 
- 
+    /**
+ * Remove the specified newsletter.
+ * 
+ * This endpoint allows the authenticated user to delete a specific newsletter.
+ *
+ * @authenticated
+ * @urlParam id integer required The ID of the newsletter to be deleted. Example: 1
+ * @response 200 {
+ *   "message": "Newsletter deleted successfully"
+ * }
+ * @response 404 {
+ *   "message": "Newsletter not found"
+ * }
+ */
+    public function destroy($id)
+    {
+        $newsletter = Newsletter::where('user_id', Auth::id())->findOrFail($id);
+        $newsletter->delete();
+
+        return response()->json(null, 204);
+    }
 }
