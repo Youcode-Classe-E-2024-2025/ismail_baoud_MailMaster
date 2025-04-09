@@ -70,5 +70,31 @@ class NewsletterController extends Controller
     }
 
 
- 
+    /**
+ * Display the specified newsletter.
+ * 
+ * This endpoint returns the details of a specific newsletter.
+ *
+ * @authenticated
+ * @urlParam id integer required The ID of the newsletter. Example: 1
+ * @response 200 {
+ *   "id": 1,
+ *   "title": "Tech Updates",
+ *   "content": "Latest updates in the tech world.",
+ *   "user_id": 1,
+ *   "created_at": "2025-04-07T12:00:00",
+ *   "updated_at": "2025-04-07T12:00:00"
+ * }
+ * @response 404 {
+ *   "message": "Newsletter not found"
+ * }
+ */
+    public function show($id)
+    {
+        $newsletter = Newsletter::where('user_id', Auth::id())->findOrFail($id);
+        return response()->json($newsletter);
+    }
+
+
+  
 }
