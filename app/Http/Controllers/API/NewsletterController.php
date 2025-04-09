@@ -96,5 +96,42 @@ class NewsletterController extends Controller
     }
 
 
-  
+    /**
+ * Update the specified newsletter.
+ * 
+ * This endpoint allows the authenticated user to update a specific newsletter.
+ *
+ * @authenticated
+ * @urlParam id integer required The ID of the newsletter to be updated. Example: 1
+ * @bodyParam title string required The updated title of the newsletter. Example: "Updated Tech Updates"
+ * @bodyParam content string required The updated content of the newsletter. Example: "New updates in tech."
+ * @response 200 {
+ *   "id": 1,
+ *   "title": "Updated Tech Updates",
+ *   "content": "New updates in tech.",
+ *   "user_id": 1,
+ *   "created_at": "2025-04-07T12:00:00",
+ *   "updated_at": "2025-04-07T12:30:00"
+ * }
+ * @response 404 {
+ *   "message": "Newsletter not found"
+ * }
+ * @response 422 {
+ *   "message": "The given data was invalid."
+ * }
+ */
+    public function update(Request $request, $id)
+    {
+        $newsletter = Newsletter::where('user_id', Auth::id())->findOrFail($id);
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+        ]);
+
+        $newsletter->update($validated);
+        return response()->json($newsletter);
+    }
+
+
+ 
 }
