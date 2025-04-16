@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
+    protected $fillable = [
+        'user_id',
+        'newsletter_id',
+        'subject',
+        'status',
+        'sent_at',
+    ];
+    
     public function user() {
         return $this->belongsTo(User::class);
     }
